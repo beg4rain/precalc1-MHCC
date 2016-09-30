@@ -21,7 +21,6 @@
         <ul>
           <li><p><m>f(x) + k</m></p></li>
           <li><p><m>f(x + h)</m></p></li>
-          <li><p><m>af(x)</m></p></li>
         </ul>
         <p>By the end of this activity, you will be able to:</p>
         <ul>
@@ -132,39 +131,181 @@
             </statement>
           </webwork>
       </exercise>
-<!-- Note: Another WeBWorK problem is coming for this introduction, dealing with a*f(x) transformations. I'm still dealing with the GeoGebra graph which is not working correctly. -->
+<!-- Begin last activity here... -->
+      <exercise>
+        <webwork xml:id="vertical-and-horizontal-transformation-application-projectile-motion">
+          <setup>
+
+            <var name="$afterOne">
+              <static>0</static>
+            </var>
+
+            <var name="$afterTwo">
+              <static>1</static>
+            </var>
+
+            <var name="$afterThree">
+              <static>2</static>
+            </var>
+
+            <var name="afterT">
+              <static>t-1</static>
+            </var>
+
+            <var name="$units">
+              <set>
+                <member correct="yes">\text{Seconds}</member>
+                <member>\text{Feet}</member>
+                <member>\text{None of these}</member>
+              </set>
+            </var>
+
+            <pg-code>
+              Context('Numeric');
+              Context()->variables->are(t=>'Real');
+              $afterOne=Real(0);
+              $afterTwo=Real(1);
+              $afterThree=Real(2);
+              $afterT=Formula("t-1");
+              $units=PopUp(["?","Seconds","Feet","None of these"],"Seconds");
+            </pg-code>
+
+          </setup>
+
+          <statement>
+            <p>The function <m>h(t) = -4.9t^2 + 10t + 40</m> will approximate the height of an object which was thrown straight upward at a speed of 10 meters per second at time <m>t = 0</m> seconds from a height of 40 meters. See the graph below.</p>
+            <p>You can move the point to see how high the object will be at a certain time, or when the object will hit the ground.</p>
+            <p>[@MODES(HTML=&gt;'&lt;iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/BmHTxqW6/width/421/height/260/border/888888/sri/true" width="421px" height="260px" style="border:0px;"&gt; &lt;/iframe&gt;', TeX =&gt;"A GeoGebra applet.");@]*</p>
+            <p>Now, we can use this function to describe other situations involving such an object. For example, suppose the person had waited until <m>t = 1</m> second before throwing the object.</p>
+            <p>If the person waited 1 second before throwing it, how long would the object be in the air when <m>t = 1</m>?</p>
+            <p><var name="$afterOne" width="15" /> <var name="$units" form="popup" /></p>
+            <p>If the person waited 1 second before throwing it, how long would the object be in the air when <m>t = 2</m>?</p>
+            <p><var name="$afterTwo" width="15" /> <var name="$units" form="popup" /></p>
+            <p>If the person waited 1 second before throwing it, how long would the object be in the air when <m>t = 3</m>?</p>
+            <p><var name="$afterThree" width="15" /> <var name="$units" form="popup" /></p>
+            <p>In general, if the person waited 1 second before throwing it, how long would the object be in the air when time = <m>t</m> seconds?</p>
+            <p><var name="$afterT" width="15" /> <var name="$units" form="popup" /></p>
+          </statement>
+
+        </webwork>
+
+      </exercise>
+
+      <exercise>
+        <webwork xml:id="vertical-and-horizontal-transformation-application-projectile-motion-graph">
+          <setup>
+
+            <var name="whichGraph">
+              <set>
+                <member correct="yes">\text{Graph 1}</member>
+                <member>\text{Graph 2}</member>
+              </set>
+            </var>
+
+            <pg-code>
+              $whichGraph=RadioButtons(
+                ["Graph 1", "Graph 2"], 0, displaylabels => 0
+              );
+            </pg-code>
+
+          </setup>
+
+          <statement>
+            <p>Which graph below shows the height of the object if the person waited 1 second before throwing it?</p>
+            <p>Graph 1 [@MODES(HTML=&gt;'&lt;iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/kCE4de8p/width/421/height/260/border/888888/sri/true" width="421px" height="260px" style="border:0px;"&gt; &lt;/iframe&gt;', TeX =&gt;"A GeoGebra applet.");@]*</p>
+            <p>Graph 2 [@MODES(HTML=&gt;'&lt;iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/PNeV26dS/width/421/height/226/border/888888/sri/true" width="421px" height="260px" style="border:0px;"&gt; &lt;/iframe&gt;', TeX =&gt;"A GeoGebra applet.");@]*</p>
+            <p><var name="$whichGraph" form="buttons" /></p>
+          </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork xml:id="vertical-and-horizontal-transformations-application-projectile-motion-time-delay-and-hight-increase">
+          <setup>
+            <var name="$input">
+              <static>t-1</static>
+            </var>
+
+            <var name="addOrSubtract">
+              <set>
+                <member correct="yes">\text{Add}</member>
+                <member>\text{Subtract}</member>
+              </set>
+            </var>
+
+            <var name="outputChange">
+              <static>12</static>
+            </var>
+
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $input="t-1";
+              $addOrSubtract=PopUp(["?","Add","Subtract"],"Add");
+              $outputChange=Real(12);
+
+            </pg-code>
+
+          </setup>
+
+          <statement>
+
+            <p>Now let's put both types of transformations together in one application.</p>
+            <p>Again, we will use the same function <m>f(t) = -4.9t^2 + 10t + 40</m>, which represents the height of an object which was thrown straight upward at a speed of 10 meters per second, from an initial height of 40 meters.</p>
+            <p>Suppose now that the person waited 1 second and also took it an additional 12 meters higher in elevation before throwing it.</p>
+            <p>Waiting 1 second is a change to the input, so the input of the function will now be: <var name="$input" width="5" /></p>
+            <p>Carrying the object an additional 12 meters upward before throwing it is a change to the output, so we will <var name="$addOrSubtract" form="popup" /> the number <m>12</m> to the outside of the function.</p>
+            <p>Putting these transformations together, the formula will now be:</p>
+            <p><m>f(</m><var name="$input" width="5" /><m>) + </m><var name="$outputChange" width="2" /></p>
+            <p>= <m>-4.9(</m><var name="$input" width="5" /><m>)^2 + 10(</m><var name="$input" width="5" /><m>) + 40 + </m><var name="$outputChange" width="2" /></p>
+
+          </statement>
+        </webwork>
+      </exercise>
+
     </introduction>
 
     <conclusion>
       <paragraphs>
-        <p>You should now see how a function's graph is transformed by changing its formula in the following ways:</p>
-        <ul>
-          <li><m>f(x) + k</m> moves the graph up or down by <m>k</m> units.</li>
-          <li><m>f(x + h)</m> moves the graph left or right by <m>h</m> units.</li>
-          <li><m>af(x)</m> makes the graph steeper by a factor of <m>a</m></li>
-        </ul>
-        <p>In the first case, adding a value <m>k</m> outside of the function produced a <term>vertical shift</term> to the graph. Adding a positive number shifted the graph up, and adding a negative number shifted the graph down. This should make sense because <m>f(x)</m> is the output of the function, so adding a value outside will change the <m>y</m> values.</p>
-        <p>In the second case, adding a value <m>h</m> inside the function produced a <term>horizontal shift</term> to the graph. Adding a positive number shifted the graph to the left, and adding a negative number shifted the graph to the right. This also makes sense because <m>x</m> is the input of the function, so adding a value inside the parentheses will change the <m>x</m> values.</p>
-        <p>It may have been surprising to see that adding a positive number to the input will move the graph to the <em>left</em>, but consider this: In the example <m>f(x) = x^2</m>, the vertex is the lowest point, occuring when the input <m>x = 0</m>. For a parabola to be shifted horizontally <m>5</m> units to the right, this should happen when the number being squared is <m>0</m>. So, making the transformation <m>f(x-5) = (x-5)^2</m> does just that &#8211; it forces the value <m>x = 5</m> to give <m>0</m> as the argument in the function <m>f(x) = x^2</m>. So, this moves the vertext over to the value <m>x = 5</m>.</p>
-        <p>In the last case, multiplying outside of the function by a value <m>a</m> <term>vertically stretched</term> the graph by a factor of <m>a</m></p>
+        <p>To <term>transform</term> a function means to change it -- either its <term>input</term> or its <term>output</term>. If the change is only in position (the graph looks the same, but is in a different location) the change is called a <term>translation</term>. [We will look at other types of transformations in another section.]</p>
+        <p>In this lesson we learn how to translate a graph or a table of values. This will involve adding and subtracting values to the input and/or the output of a function's formula.</p>
+        <p>It will be important for us to distinguish between the input and the output of a function. For instance, we must understand that the function <md><mrow>f(x) = x^2 - 5x</mrow></md></p>
+        <p>has an input <m>x</m> and an output <m>f(x)</m>.</p>
+        <p>If the input is changed to <m>x−3</m>, then the output is now <m>f(x−3)</m>. If the input is changed to <m>2w + 5</m>, then the ouput is <m>f(2w + 5)</m>.</p>
+        <p>We must also remember how a formula works. For example, if you put <m>x</m> into a formula, then the formula will have <m>x</m>’s in it. But if you put <m>x–3</m> into a formula, then it will have <m>(x-3)</m>’s in it.</p>
+        <p>Therefore, for the function <m>f(x) = x^2 - 5x</m>, we would have: <md><mrow>f(x−3) = (x−3)^2 − 5(x−3)</mrow></md> and <md><mrow>f(2w+5) = (2w+5)^2 − 5(2w+5)</mrow></md></p>
+      </paragraphs>
+      <paragraphs>
+        <p>Now what does this do to the graph of <m>f(x)</m>? It turns out that subtracting 3 from the input just moves the graph of the function to the right. This is called a <term>horizontal translation</term>.</p>
+        <p>
+          <ul>
+            <li>Adding a number to the input will move the graph to the left.</li>
+            <li>Subtracting a number from the input will move the graph to the right.</li>
+          </ul>
+        </p>
+        <p>In fact, whenever you do anything to the input of a function, the result is some kind of horizontal change to the graph. In this section, we see that adding to the input will produce a horizontal shift(translation) of the graph to the left or the right.</p>
+        <p>On the other hand, if you make changes to the outside of the function, it will affect the graph vertically. In this section, we see that adding or subtracting from the output will produce a vertical shift of the graph up or down.</p>
+        <p>
+          <ul>
+            <li>Adding a number to the ouput will move the graph up.</li>
+            <li>Subtracting a number from the output will move the graph down.</li>
+          </ul>
+        </p>
       </paragraphs>
 
-      <example>
-<!-- Note: The graphs in this <example> will not show until Rob Beezer makes appropriate changes to MBX, allowing GeoGebra graphs outside of WeBWorK problems. -->
-        <p>The function <m>h(t) = -4.9t^2 + 10t + 40</m> will approximate the height of an object which was thrown straight upward at a speed of <quantity><mag>10</mag><unit base="meter" /><per base="second"/></quantity> at time <m>t = 0</m> seconds from a height of <quantity><mag>40</mag><unit base="meter"/></quantity>. See the graph below.</p>
-        <geogebra materialID="BmHTxqW6" width="421" height="260" />
-        <!-- https://www.geogebra.org/m/Ytwv3fEB -->
-        <p>You can move the point to see how hight the object will be at a certain time, or when the object will hit the ground.</p>
-        <p>Now, we can use this function to describe other situations involving such an object. For example, if the person had waited one second before throwing the object, then the graph would be shifted horizontally to the right by one second.</p>
-        <geogebra materialID="kCE4de8p" width="421" height="260" />
-        <!-- https://www.geogebra.org/m/N9Tx36kF -->
-        <p>To shift the graph to the right, we make the transformation: <md><mrow>h(t-1) = -4.9(t-1)^2 + 10(t-1) + 40</mrow></md></p>
-        <p>Next, suppose the person waited one second before throwing the object but also took it an additional <quantity><mag>12</mag><unit base="feet"/></quantity> upward before throwing it. This involves a horizontal shift of <quantity><mag>1</mag><unit base="second"/></quantity> to the right and a vertical shift of <quantity><mag>12</mag><unit base="meter"/></quantity> upward:<md>
-          <mrow>h(t-1) + 12 \amp= -4.9(t-1)^2 + 10(t-1) + 40 + 12</mrow>
-          <mrow>\amp=-4.9(t-1)^2 + 10(t-1) + 52</mrow></md></p>
-        <geogebra materialID="neB9zc2z" width="421" height="260" />
-        <!-- https://www.geogebra.org/m/avHM2ZSt -->
-      </example>
+      <list>
+          <title>Video Lectures</title>
+          <dl>
+              <li>
+                  <title>Graph a Logarithm Function</title>
+                  <!--<video source="http://stream.mhcc.edu/videos/greenja/captioned/m05-cyu-average-rate-of-change-captioned_-_20150119_180537_26.html" />-->
+              </li>
+              <li>
+                  <title>Find Equation of a Line</title>
+                  <!--<video source="http://stream.mhcc.edu/videos/greenja/captioned/cyu-point-slope-form-captioned_-_20150114_150341_26.html" />-->
+              </li>
+          </dl>
+      </list>
+
 
         <p>Now let's put this information to the test to determine the equation of a function which has been transformed.</p>
 
